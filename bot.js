@@ -67,7 +67,7 @@ client.on('message', (msg) => {
 
 client.on('voiceStateUpdate', (oldmember, newmember) => {
 	if (oldmember.voiceChannel) {
-		if (oldmember.voiceChannel.members <= 0) {
+		if (oldmember.voiceChannel.members.array().length <= 1) {
 			oldmember.voiceChannel.leave();
 		}
 	}

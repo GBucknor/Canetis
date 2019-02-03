@@ -4,10 +4,16 @@
   "description": "",
   "main": "bot.js",
   "dependencies": {
-    "dotenv": "^6.2.0",
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "dotenv": "^6.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "erlpack": "github:hammerandchisel/erlpack",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "libsodium-wrappers": "^0.7.4",
+    "node-opus": "^0.3.1",
+    "uws": "^99.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
