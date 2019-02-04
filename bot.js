@@ -37,11 +37,17 @@ let joinChannel = (msg) => {
 // Leaves the voice channel the user is currently in.
 let leaveChannel = (msg) => {
 	if (msg.member.voiceChannel) {
-		msg.member.voiceChannel.leave();
+		if (client.guilds.has(msg.member.voiceChannel.guild.id)) {
+			msg.member.voiceChannel.leave();
+		} else {
+			msg.reply('I\'m not in your current voice channel');
+		}
 	} else {
 		msg.reply('you need to be in the channel to ask me to leave.');
 	}
 }
+
+let playSound = (msg, args) => {}
 
 // Chooses which function to have the bot execute.
 let parseCommand = (msg) => {
@@ -56,6 +62,10 @@ let parseCommand = (msg) => {
 
 	if (cmdObj.main === 'leave') {
 		leaveChannel(msg);
+	}
+
+	if (cmdObj.main === 'play') {
+		//
 	}
 }
 
