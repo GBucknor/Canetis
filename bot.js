@@ -34,6 +34,15 @@ let joinChannel = (msg) => {
 	}
 }
 
+// Leaves the voice channel the user is currently in.
+let leaveChannel = (msg) => {
+	if (msg.member.voiceChannel) {
+		msg.member.voiceChannel.leave();
+	} else {
+		msg.reply('you need to be in the channel to ask me to leave.');
+	}
+}
+
 // Chooses which function to have the bot execute.
 let parseCommand = (msg) => {
 	let cmdObj = separateCmd(msg.content);
@@ -46,7 +55,7 @@ let parseCommand = (msg) => {
 	}
 
 	if (cmdObj.main === 'leave') {
-		//
+		leaveChannel(msg);
 	}
 }
 
