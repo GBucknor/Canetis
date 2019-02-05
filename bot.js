@@ -37,7 +37,7 @@ let joinChannel = (msg) => {
 // Leaves the voice channel the user is currently in.
 let leaveChannel = (msg) => {
 	if (msg.member.voiceChannel) {
-		if (client.guilds.has(msg.member.voiceChannel.guild.id)) {
+		if (isClientInVC(msg.member.voiceChannel)) {
 			msg.member.voiceChannel.leave();
 		} else {
 			msg.reply('I\'m not in your current voice channel');
@@ -47,7 +47,32 @@ let leaveChannel = (msg) => {
 	}
 }
 
-let playSound = (msg, args) => {}
+let isClientInVC = (channel) => {
+	let memArray = channel.members.array();
+	for (let i = 0; i < memArray.length;++i) {
+		if (memArray[i].user === client.user) {
+			return true;
+		}
+	}
+	return false;
+}
+
+let playSound = (msg, args) => {
+	if (msg.member.voiceChannel) {
+		if (isClientInVC(msg.member.voiceChannel)) {
+			let connection = msg.member.voiceChannel.connection;
+			if (args.length !== 0) {
+				console.log('got here');
+				//connection.playArbitraryInput(args[0]);
+				connection.playArbitraryInput('https://soundcloud.com/andrew-wilborn-614125133/torna-the-golden-country-battle-theme-xenoblade-2')
+			}
+		} else {
+			msg.reply('I\'m not in your current voice channel');
+		}
+	} else {
+		msg.reply('you need to be in a voice channel to listen to music.');
+	}
+}
 
 // Chooses which function to have the bot execute.
 let parseCommand = (msg) => {
@@ -65,7 +90,7 @@ let parseCommand = (msg) => {
 	}
 
 	if (cmdObj.main === 'play') {
-		//
+		playSound(msg, cmdObj.arguments);
 	}
 }
 
